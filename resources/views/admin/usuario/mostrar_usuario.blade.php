@@ -1,108 +1,105 @@
 @extends('adminlte::page')
-@section('title', 'agenda-escolar')
+
+@section('title', 'Dashboard Administración')
 
 @section('content_header')
-    <style type="text/css">
-        .div_center{
-            color: black; 
-            text-align: center;
-            font-weight: bold;
-            font-size: 25px;
-        }
 
-        table {
-            width: 10px;
-            border: 1px solid #000;
-            margin: auto;
-        }
-        th, td {
-            width: 15%;
-            text-align: left;
-            vertical-align: top;
-            border: 1px solid #000;
-            border-collapse: collapse;
-            padding: 0.3em;
-            caption-side: bottom;
-        }
-        caption {
-            padding: 0.3em;
-            color: #fff;
-                background: #c84747;
-        }
-        th {
-            background: #3A4546;
-        }
-        .th_deg{
-            color: whitesmoke;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ asset('/service/service.css') }}">
+    <!-- CSS de Bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-        .th_degA{
-            color: whitesmoke;
-            text-align: center
-        }
-    </style>
-
-<div class="row justify-content-center">
-    <div class="col-md-4" style="margin-top: 10px;">
-        <a class="btn btn-primary btn-block" href="{{url('crear_usuario')}}">Crear usuario</a>
-    </div>
-    
-</div>
-
-
+<!-- JS de Bootstrap (con Popper.js incluido) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 @stop
 
+    
 
 @section('content')
-<div class="div_center">
-    <p>Lista de usuarios</p>
-</div>
+<div class="container">
     @if (session()->has('message'))
-                <div class="alert alert-success">
-                                <button type="button" class="close"
-                                          data-dismiss="alert" aria-hidden="true">
-                                       X
-                                  </button>
-                                      {{session()->get('message')}}
-                             </div>
-            @endif
-<div class="table-responsive">
-    <table class="table">
+        <div class="alert alert-success">
+                        <button type="button" class="close"
+                                data-dismiss="alert" aria-hidden="true">
+                            X
+                        </button>
+                            {{session()->get('message')}}
+        </div>
+    @endif
+    @if(session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+    <h1>Lista de Usuarios</h1>
+    <button href="" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrear">
+       {{-- {{ route('index.create') }} --}}
+        Crear Usuario
+    </button>
+
+    @include('admin.usuario.modalCrear')
+
+    <table class="table table-bordered mt-4">
         <thead>
             <tr>
                 <th class="th_deg" scope="col">ID</th>
-                <th class="th_deg" scope="col">Nombre Completo</th>
+                <th class="th_deg" scope="col">CI</th>
+                <th class="th_deg" scope="col">Nombre</th>
+                <th class="th_deg" scope="col">Apellido Paterno</th>
+                <th class="th_deg" scope="col">Apellido Materno</th>
+                <th class="th_deg" scope="col">Sexo</th>
+                <th class="th_deg" scope="col">Telefono</th> 
+                <th class="th_deg" scope="col">Direccion</th> 
                 <th class="th_deg" scope="col">Correo</th>
-                <th class="th_deg" scope="col">tipo</th>
-                <th class="th_deg" scope="col">rol</th>
-                {{-- <th class="th_degA" scope="col">Acciones</th> --}}
+                <th class="th_degA" scope="col">Actualizar</th>
+                <th class="th_degA" scope="col">Eliminar</th>
+
             </tr>
         </thead>
         <tbody>
             @foreach ($usuario as $user)
             <tr>
                 <td>{{$user->id}}</td>
+                <td>{{$user->ci}}</td>
                 <td>{{$user->nombres}}</td>
+                <td>{{$user->apellido_paterno}}</td>
+                <td>{{$user->apellido_materno}}</td>
+                <td>{{$user->sexo}}</td> 
+                <td>{{$user->telefono}}</td>
+                <td>{{$user->direccion}}</td>
                 <td>{{$user->email}}</td>
-                <td>{{$user->usertype}}</td>
-                <td>{{$user->rol}}</td>
+                <td>
+                        <button href="{{url('editar_Usuario', $user->id)}}" type="button" 
+                                class="btn btn-warning" data-toggle="modal"
+                                data-target="#modalEditarUser-{{ $user->id }}" 
+                                >                           
+                            Editar
+                        </button>
 
+                        @include('admin.usuario.modalEditar')
 
-                {{-- <td>
-                    <div style="display: flex; justify-content: space-between;">
-                        <a class="btn btn-warning" href="{{url('actualizar_profesor', $profesor->id)}}">editar</a>
-                        <a class="btn btn-danger" onclick="return confirm('¿Estás seguro?')"
-                           href="{{url('borrar_profesor', $profesor->id)}}">eliminar</a>
-                    </div>
-                </td>                         --}}
+                                 
+                    
+                </td>  
+                <td>
+                    <form action="{{ url('borrar_Usuario', $user->id) }}" method="POST"
+                        style="display: inline-block;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de eliminar?')">
+                            Eliminar
+                        </button>
+                    </form> 
+                </td>
             </tr>
-            @endforeach
+            @endforeach 
         </tbody>
     </table>
 </div>
 
-
-            
-
-@stop 
+@stop

@@ -32,24 +32,30 @@
             {{ session('error') }}
         </div>
     @endif
-    <h1>Lista de Especialidades</h1>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearEsp">
-        Agregar especialidad
+    <h1>Medicos Especialistas</h1>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAsignarEsp">
+        Agregar especialidad al medico
     </button>
 
         <table class="table table-bordered mt-4">
             <thead>
                 <tr>
                     <th>ID</th> 
+                    <th>Nombre</th>  
+                    <th>Apellido paterno</th>                             
+                    <th>Apellido paterno</th>                                                        
                     <th>Especialidad</th>                             
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($especialidad as $especialidades)
+                @foreach ($espMed as $especialidades)
                 <tr>
                     <td>{{$especialidades->id}}</td>
-                    <td>{{$especialidades->nombre}}
+                    <td>{{$especialidades->medico->nombres}}</td>
+                    <td>{{$especialidades->medico->apellido_paterno}}</td>
+                    <td>{{$especialidades->medico->apellido_materno}}</td>
+                    <td>{{$especialidades->especialidad->nombre}}
                         <td>
                             <button href="{{url('editar_especialidad', $especialidades->id)}}" type="button" 
                                         class="btn btn-warning" data-toggle="modal"
@@ -67,7 +73,7 @@
                                     Eliminar
                                 </button>
                             </form>
-                            @include('admin.especialidad.modalEditar')
+                            @include('admin.especialidad_medico.modalEditar')
 
                         </td>  
                         <td>
@@ -79,7 +85,7 @@
             </tbody>
         </table>
     
-    @include('admin.especialidad.modalCrear')
+    @include('admin.especialidad_medico.modalAsignar')
 </div>
 @stop
 

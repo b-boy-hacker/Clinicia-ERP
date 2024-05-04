@@ -16,10 +16,15 @@ class UsuarioSeeder extends Seeder
     {
         User::create([
             'nombres' => 'Sergio David',
+            'ci' => '123',
+            'apellido_paterno' => 'Cambara',
+            'apellido_materno' => 'Dorbigny',
+            'sexo' => 'Masculino',
+            'telefono' => '74921968',
+            'direccion' => 'Urb el Urubo',
+
             'email' => 'adm@gmail.com',
             'password' => bcrypt('12345678'),
-            'usertype' => '1', 
-            'rol' => 'Administrador', 
         ]);
     }
 }

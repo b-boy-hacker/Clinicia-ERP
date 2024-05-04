@@ -20,37 +20,32 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
 Route::get('redirigir', [AdminController::class, 'redirigir']);
 Route::get('inicio', [AdminController::class, 'inicio']);
+Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
 
-Route::get('mostrar_usuario', [AdminController::class, 'mostrar_usuario']);
+Route::resource('mostrar_usuario', AdminController::class);
 Route::get('/crear_usuario', [AdminController::class, 'crear_usuario']);
 Route::post('/crear_nuevo_usuario', [AdminController::class, 'crear_nuevo_usuario']);
+Route::post('/editar_Usuario/{id}', [AdminController::class, 'editar_Usuario']);
+Route::delete('/borrar_Usuario/{id}', [AdminController::class, 'borrar_Usuario']);
 
 Route::get('/mostrar_medico', [AdminController::class, 'mostrar_medico']);
-Route::get('/crear_medico', [AdminController::class, 'crear_medico']);
-Route::post('/crear', [AdminController::class, 'crear']);
-Route::get('/actualizar_medico/{id}', [AdminController::class, 'actualizar_medico']);
-Route::put('/confirmar_medico/{id}', [AdminController::class, 'confirmar_medico']);
-Route::get('/borrar_medico/{id}', [AdminController::class, 'borrar_medico']);
-
-
 Route::get('/mostrar_paciente', [AdminController::class, 'mostrar_paciente']);
-Route::get('/crear_paciente', [AdminController::class, 'crear_paciente']);
-Route::post('/crear_estudiante', [AdminController::class, 'crear_estudiante']);
-Route::get('/borrar_paciente/{id}', [AdminController::class, 'borrar_paciente']);
-Route::get('/actualizar_paciente/{id}', [AdminController::class, 'actualizar_paciente']);
-Route::put('/confirmar_paciente/{id}', [AdminController::class, 'confirmar_paciente']);
 
+Route::get('/rol', [AdminController::class, 'rol']);
+Route::post('/asignar_rol', [AdminController::class, 'asignar_rol']);
+Route::post('/editar_UserRol/{id}', [AdminController::class, 'editar_UserRol']);
+Route::delete('/borrar_UserRol/{id}', [AdminController::class, 'borrar_UserRol']);
 
 // Rutas de recursos para Servicios y ServicioHorarios
 Route::resource('index', ServicioController::class);
-Route::resource('serviciohorarios', ServicioHorarioController::class);
 
 Route::get('/mostrar_especialidad', [AdminController::class, 'mostrar_especialidad']);
-Route::get('/ruta_especialidad', [AdminController::class, 'ruta_especialidad']);
 Route::post('/crear_especialidad', [AdminController::class, 'crear_especialidad']);
-Route::post('/crear_materia', [AcademicoController::class, 'crear_materia']);
-Route::get('/actualizar_materia/{id}', [AcademicoController::class, 'actualizar_materia']);
-Route::put('/confirmar_materia/{id}', [AcademicoController::class, 'confirmar_materia']);
-Route::get('/borrar_materia/{id}', [AcademicoController::class, 'borrar_materia']);
+Route::post('/editar_especialidad/{id}', [AdminController::class, 'editar_especialidad']);
+Route::delete('/borrar_especialidad/{id}', [AdminController::class, 'borrar_especialidad']);
+
+Route::get('/ver_esp_medico', [AdminController::class, 'ver_esp_medico']);
+Route::post('/crear_esp_medico', [AdminController::class, 'crear_esp_medico']);

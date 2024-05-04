@@ -30,7 +30,7 @@ class ServicioController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
+    {
     // Validar los datos de entrada
     $request->validate([
         'tipo_servicio' => 'required|string|max:250'
@@ -41,7 +41,8 @@ class ServicioController extends Controller
 
     // Crear el nuevo servicio
     $servicio = new Servicio([
-        'id' => $nextId,  // Solo si realmente necesitas asignarlo manualmente
+        'id' => $nextId,  // Solo si realmente necesitas 
+                          // asignarlo manualmente
         'tipo_servicio' => $request->tipo_servicio,
     ]);
 
@@ -89,10 +90,10 @@ class ServicioController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy($id)
-{
-    $servicio = Servicio::findOrFail($id);
-    $servicio->delete();
-
-    return redirect()->route('index.index')->with('success', 'Servicio eliminado con éxito.');
-}
+    {
+        $servicio = Servicio::findOrFail($id);
+        $servicio->delete();
+        return redirect()->route('index.index')->with('success', 'Servicio eliminado con éxito.');
+    }
+    
 }

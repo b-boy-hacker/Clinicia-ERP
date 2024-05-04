@@ -259,7 +259,7 @@ return [
     'register_url' => 'register',
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
-    'profile_url' => false,//,'user/profile',
+    'profile_url' =>false,// ,//,'user/profile',
 
     /*
     |--------------------------------------------------------------------------
@@ -312,9 +312,16 @@ return [
             'can'  => 'manage-blog',
         ],*/
        //----------
+       [
+        'text' => 'Cerrar Sesión',
+        'url' => 'logout',
+        'icon' => 'fas fa-sign-out-alt',
+        'topnav_right' => true,
+        ],
+    
         [
             'text' => 'Inico',
-            'url'  => '#',
+            'url'  => 'redirigir',
             'icon' => 'fas fa-fw fa-home',
          ],
         
@@ -352,15 +359,16 @@ return [
             ],
         ],
         [
-            'text'    => 'Gestion Servicios',
+            'text'    => 'Gestion Roles',
            // 'icon'    => 'fas fa-fw fa-book',
            // 'can' => 'gestion academica',
             'submenu' => [
                 [
-                    'text' => 'Servicio',
-                    'url'  => 'index',
+                    'text' => 'Rol',
+                    'url'  => 'rol',
                     'icon' => 'fas fa-fw fa-user',
-                ],   
+                ], 
+
             ],
         ],
         [
@@ -372,9 +380,30 @@ return [
                     'text' => 'Especialidad',
                     'url'  => 'mostrar_especialidad',
                     'icon' => 'fas fa-fw fa-user',
+                ], 
+                
+                // [
+                //         'text' => 'Especialidad del medico',
+                //         'url'  => 'ver_esp_medico',
+                //         'icon' => 'fas fa-fw fa-user',
+                // ],   
+                
+            ],
+        ],
+        
+        [
+            'text'    => 'Gestion Servicios',
+           // 'icon'    => 'fas fa-fw fa-book',
+           // 'can' => 'gestion academica',
+            'submenu' => [
+                [
+                    'text' => 'Servicio',
+                    'url'  => 'index',
+                    'icon' => 'fas fa-fw fa-user',
                 ],   
             ],
         ],
+        
        
     ],
 
