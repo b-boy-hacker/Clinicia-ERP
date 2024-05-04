@@ -1,108 +1,76 @@
 @extends('adminlte::page')
-@section('title', 'agenda-escolar')
+
+@section('title', 'Dashboard Administración')
 
 @section('content_header')
-    <style type="text/css">
-        .div_center{
-            color: black; 
-            text-align: center;
-            font-weight: bold;
-            font-size: 25px;
-        }
 
-        table {
-            width: 10px;
-            border: 1px solid #000;
-            margin: auto;
-        }
-        th, td {
-            width: 15%;
-            text-align: left;
-            vertical-align: top;
-            border: 1px solid #000;
-            border-collapse: collapse;
-            padding: 0.3em;
-            caption-side: bottom;
-        }
-        caption {
-            padding: 0.3em;
-            color: #fff;
-                background: #c84747;
-        }
-        th {
-            background: #3A4546;
-        }
-        .th_deg{
-            color: whitesmoke;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ asset('/service/service.css') }}">
+    <!-- CSS de Bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-        .th_degA{
-            color: whitesmoke;
-            text-align: center
-        }
-    </style>
-
-    {{-- <div style="text-align: center;">
-        <div style="color: white; display: inline-block;">
-            <a class="btn btn-primary" href="{{url('crear_alumno')}}">crear alumno</a>
-        </div>
-    </div> --}}
-
-
+<!-- JS de Bootstrap (con Popper.js incluido) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 @stop
 
+    
 
 @section('content')
-<div class="div_center">
-    <p>Lista de pacientes</p>
-</div>
+<div class="container">
     @if (session()->has('message'))
-    <div class="alert alert-success">
-                    <button type="button" class="close"
-                            data-dismiss="alert" aria-hidden="true">
-                        X
-                    </button>
-                        {{session()->get('message')}}
-                </div>
+        <div class="alert alert-success">
+                        <button type="button" class="close"
+                                data-dismiss="alert" aria-hidden="true">
+                            X
+                        </button>
+                            {{session()->get('message')}}
+        </div>
     @endif
-<div class="table-responsive">
-    <table class="table">
+    @if(session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+    <h1>Lista de Pacientes</h1>
+   
+
+    @include('admin.usuario.modalCrear')
+
+    <table class="table table-bordered mt-4">
         <thead>
             <tr>
-                <th class="th_deg" scope="col">Cedula de Identidad</th>
-                <th class="th_deg" scope="col">Nombres</th>
-                <th class="th_deg" scope="col">Apellidos</th>
-                <th class="th_deg" scope="col">Direccion</th>
-                <th class="th_deg" scope="col">Telefono</th>
-                {{-- <th class="th_deg" scope="col">Rol</th> --}}
-                <th class="th_degA" scope="col">Acciones</th>
+                <th class="th_deg" scope="col">ID</th>
+                <th class="th_deg" scope="col">CI</th>
+                <th class="th_deg" scope="col">Nombre</th>
+                <th class="th_deg" scope="col">Apellido Paterno</th>
+                <th class="th_deg" scope="col">Apellido Materno</th>
+                <th class="th_deg" scope="col">Sexo</th>
+                <th class="th_deg" scope="col">Telefono</th> 
+                <th class="th_deg" scope="col">Direccion</th> 
+                <th class="th_deg" scope="col">Correo</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($usuario as $usuarioPaciente)
+            @foreach ($paciente as $usuarioPaciente)
             <tr>
-                <td>{{$usuarioPaciente->ci}}</td>
-                <td>{{$usuarioPaciente->nombres}}</td>
-                <td>{{$usuarioPaciente->apellidos}}</td>
-                <td>{{$usuarioPaciente->direccion}}</td>
-                <td>{{$usuarioPaciente->telefono}}</td>
-                <td>{{$usuarioPaciente->sexo}}</td>
-{{--                 
-                <td>
-                    <div style="display: flex; justify-content: space-between;">
-                        <a class="btn btn-warning" href="{{url('actualizar_alumno', $alumno->id)}}">editar</a>
-                        <a class="btn btn-danger" onclick="return confirm('¿Estás seguro?')"
-                         href="{{url('borrar_alumno', $alumno->id)}}">eliminar</a>
-                    </div>
-                </td>                         --}}
+                <td>{{$usuarioPaciente->user->id}}</td>
+                <td>{{$usuarioPaciente->user->ci}}</td>
+                <td>{{$usuarioPaciente->user->nombres}}</td>
+                <td>{{$usuarioPaciente->user->apellido_paterno}}</td>
+                <td>{{$usuarioPaciente->user->apellido_materno}}</td>
+                <td>{{$usuarioPaciente->user->sexo}}</td>
+                <td>{{$usuarioPaciente->user->telefono}}</td>
+                <td>{{$usuarioPaciente->user->direccion}}</td>
+                <td>{{$usuarioPaciente->user->email}}</td>
             </tr>
-            @endforeach
+            @endforeach 
         </tbody>
     </table>
 </div>
 
-
-            
-
-@stop 
+@stop

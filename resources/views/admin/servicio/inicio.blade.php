@@ -51,8 +51,7 @@
 </div>
 </div>
 
-{{--         <a href="{{ route('servicios.create') }}" class="btn btn-primary">Añadir nuevo servicio</a>
---}}        <table class="table table-bordered mt-4">
+    <table class="table table-bordered mt-4">
         <thead>
             <tr>
                 <th>ID</th>
@@ -95,8 +94,7 @@
                                 </div>
                             </div>
                         </div>
-{{--                             <a href="{{ route('servicios.edit', $servicio->id) }}" class="btn btn-info">Editar</a>
---}}                            <form action="{{ route('index.destroy', $servicio->id) }}" method="POST" style="display: inline-block;">
+                        <form action="{{ route('index.destroy', $servicio->id) }}" method="POST" style="display: inline-block;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de eliminar este servicio?')">Eliminar</button>

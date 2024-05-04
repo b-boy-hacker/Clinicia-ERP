@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Servicio;
 
 class Servicio extends Model
 {
@@ -12,9 +13,9 @@ class Servicio extends Model
     public $timestamps = false; 
     protected $fillable = ['id', 'tipo_servicio'];  // Atributos que pueden ser asignados masivamente
 
-    public function servicioHorarios()
-    {
-        return $this->hasMany(ServicioHorario::class, 'id_servicio');
-    }
+    // public function servicioHorarios()
+    // {
+    //     return $this->hasMany(ServicioHorario::class, 'id_servicio');
+    // }
 
 }
