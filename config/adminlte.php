@@ -382,11 +382,11 @@ return [
                     'icon' => 'fas fa-fw fa-user',
                 ], 
                 
-                // [
-                //         'text' => 'Especialidad del medico',
-                //         'url'  => 'ver_esp_medico',
-                //         'icon' => 'fas fa-fw fa-user',
-                // ],   
+                [
+                        'text' => 'Especialidad del medico',
+                        'url'  => 'ver_esp_medico',
+                        'icon' => 'fas fa-fw fa-user',
+                ],   
                 
             ],
         ],

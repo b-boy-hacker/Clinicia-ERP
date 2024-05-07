@@ -40,7 +40,7 @@
         <table class="table table-bordered mt-4">
             <thead>
                 <tr>
-                    <th>ID</th> 
+                    {{-- <th>ID</th>  --}}
                     <th>Nombre</th>  
                     <th>Apellido paterno</th>                             
                     <th>Apellido paterno</th>                                                        
@@ -51,13 +51,13 @@
             <tbody>
                 @foreach ($espMed as $especialidades)
                 <tr>
-                    <td>{{$especialidades->id}}</td>
-                    <td>{{$especialidades->medico->nombres}}</td>
-                    <td>{{$especialidades->medico->apellido_paterno}}</td>
-                    <td>{{$especialidades->medico->apellido_materno}}</td>
+                    {{-- <td>{{$especialidades->id}}</td> --}}
+                    <td>{{$especialidades->nombres}}</td>
+                    <td>{{$especialidades->apellido_paterno}}</td>
+                    <td>{{$especialidades->apellido_materno}}</td>
                     <td>{{$especialidades->especialidad->nombre}}
                         <td>
-                            <button href="{{url('editar_especialidad', $especialidades->id)}}" type="button" 
+                            <button href="{{url('editar_esp_med', $especialidades->id)}}" type="button" 
                                         class="btn btn-warning" data-toggle="modal"
                                         data-target="#modalEditarEsp-{{ $especialidades->id }}" 
                                         >                           
@@ -65,7 +65,7 @@
                             </button>
     
                         
-                            <form action="{{ url('borrar_especialidad', $especialidades->id) }}" method="POST"
+                            <form action="{{ url('borrar_esp_med', $especialidades->id) }}" method="POST"
                                 style="display: inline-block;">
                                 @csrf
                                 @method('DELETE')

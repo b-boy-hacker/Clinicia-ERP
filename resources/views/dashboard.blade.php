@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+{{-- @extends('adminlte::page')
 
 @section('title', 'Dashboard Administración')
 
@@ -8,4 +8,4 @@
 
 @section('content')
    
-@stop
+@stop --}}

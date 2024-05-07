@@ -15,12 +15,36 @@
                     <div class="modal-body">
                     
                         <div class="form-group">
-                            <label for="tipo_servicio">Medico</label>
-                            <select class="text_color" name="medico_id" required="">
+                            <label for="tipo_servicio">Nombres</label>
+                            <select class="text_color" name="nombres" required="">
                                 <option value="" selected>Seleccionar usuario...</option>
-                                @foreach ($medico as $user)
-                                    <option value="{{ $user->id}}">{{ $user->id}}
-                                        ...{{ $user->nombres}}</option>
+                                @foreach ($medico as $usuario_rol)
+                                    <option value="{{ $usuario_rol->user->nombres}}">
+                                        {{ $usuario_rol->user->id}}
+                                        {{ $usuario_rol->user->nombres}}                                                                           
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="tipo_servicio">Apellido Paterno</label>
+                            <select class="text_color" name="apellido_paterno" required="">
+                                <option value="" selected>Seleccionar usuario...</option>
+                                @foreach ($medico as $usuario_rol)
+                                    <option value="{{ $usuario_rol->user->apellido_paterno}}">
+                                        {{ $usuario_rol->user->id}}
+                                        {{ $usuario_rol->user->apellido_paterno}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="tipo_servicio">Apellido Paterno</label>
+                            <select class="text_color" name="apellido_materno" required="">
+                                <option value="" selected>Seleccionar usuario...</option>
+                                @foreach ($medico as $usuario_rol)
+                                    <option value="{{ $usuario_rol->user->apellido_materno}}">
+                                        {{ $usuario_rol->user->id}}
+                                        {{ $usuario_rol->user->apellido_materno}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -29,12 +53,12 @@
                             <select class="text_color" name="especialidad_id" required="">
                                 <option value="" selected>Seleccionar usuario...</option>
                                 @foreach ($especialidad as $esp)
-                                    <option value="{{ $esp->id}}">{{ $esp->id}}
-                                        ...{{ $esp->nombre}}</option>
+                                    <option value="{{ $esp->id}}">
+                                        {{ $esp->nombre}}</option>
                                 @endforeach
                             </select>
                         </div>
-        
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary">Crear</button>
