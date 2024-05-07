@@ -49,3 +49,14 @@ Route::delete('/borrar_especialidad/{id}', [AdminController::class, 'borrar_espe
 
 Route::get('/ver_esp_medico', [AdminController::class, 'ver_esp_medico']);
 Route::post('/crear_esp_medico', [AdminController::class, 'crear_esp_medico']);
+
+
+use App\Http\Controllers\HorarioController;
+
+Route::get('/mi-horario', [HorarioController::class, 'mostrarVista'])->name('horario.mostrarVista');
+Route::post('/horario', [HorarioController::class, 'store'])->name('horario.store');
+Route::post('/turno-horario', [HorarioController::class, 'storeTurno'])->name('turno-horario.storeTurno');
+Route::delete('/destroy/{id}',[HorarioController::class,'destroy'])->name('horario.destroy');
+Route::delete('/destroy-turno/{id}',[HorarioController::class,'destroyTurno'])->name('turno.destroyTurno');
+
+
