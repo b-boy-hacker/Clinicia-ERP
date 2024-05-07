@@ -17,8 +17,10 @@ return new class extends Migration
             $table->string('nombres')->nullable();
             $table->string('apellido_paterno')->nullable();
             $table->string('apellido_materno')->nullable();
-            $table->string('especialidad')->nullable();
-            
+            $table->unsignedBigInteger('especialidad_id')->nullable();
+            $table->foreign('especialidad_id')->references('id')->on('especialidads')
+            ->cascadeOnUpdate()->cascadeOnDelete();
+
             $table->timestamps();
         });
     }

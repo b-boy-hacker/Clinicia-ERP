@@ -49,3 +49,6 @@ Route::delete('/borrar_especialidad/{id}', [AdminController::class, 'borrar_espe
 
 Route::get('/ver_esp_medico', [AdminController::class, 'ver_esp_medico']);
 Route::post('/crear_esp_medico', [AdminController::class, 'crear_esp_medico']);
+Route::post('/editar_esp_med/{id}', [AdminController::class, 'editar_esp_med']);
+Route::post('/borrar_esp_med/{id}', [AdminController::class, 'editar_esp_med']);
+Route::delete('/borrar_esp_med/{id}', [AdminController::class, 'borrar_esp_med']);

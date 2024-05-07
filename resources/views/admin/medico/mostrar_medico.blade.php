@@ -22,23 +22,9 @@
 
 @section('content')
 <div class="container">
-    @if (session()->has('message'))
-        <div class="alert alert-success">
-                        <button type="button" class="close"
-                                data-dismiss="alert" aria-hidden="true">
-                            X
-                        </button>
-                            {{session()->get('message')}}
-        </div>
-    @endif
-    @if(session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                        @endif
+    
     <h1>Lista de Medicos</h1>
    
-
     @include('admin.usuario.modalCrear')
 
     <table class="table table-bordered mt-4">
