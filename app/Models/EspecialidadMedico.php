@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class EspecialidadMedico extends Model
 {
     use HasFactory;
+    protected $table = 'especialidad_medicos';
+    protected $fillable = [
+        'horaI',
+        'horaF',
+        'dia',
+        'id_turno',
+    ];
+    public function turno()
+    {
+        return $this->belongsTo(Turno::class, 'id_turno');
+    }
 }

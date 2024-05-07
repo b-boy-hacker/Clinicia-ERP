@@ -55,8 +55,13 @@ use App\Http\Controllers\HorarioController;
 
 Route::get('/mi-horario', [HorarioController::class, 'mostrarVista'])->name('horario.mostrarVista');
 Route::post('/horario', [HorarioController::class, 'store'])->name('horario.store');
+Route::put('/horario/{id}', [HorarioController::class, 'update'])->name('horario.update');
+Route::put('/medico-horario/{id}', [HorarioController::class, 'updateMedicoHorario'])->name('medico-horario.updateMedicoHorario');
+
 Route::post('/turno-horario', [HorarioController::class, 'storeTurno'])->name('turno-horario.storeTurno');
+Route::post('/store-medico-horario', [HorarioController::class, 'storeMedicoHorario'])->name('medico-horario.storeMedicoHorario');
 Route::delete('/destroy/{id}',[HorarioController::class,'destroy'])->name('horario.destroy');
+Route::delete('/medico-horario-destroy/{id}',[HorarioController::class,'destroyMedicoHorario'])->name('medico-horario.destroyMedicoHorario');
 Route::delete('/destroy-turno/{id}',[HorarioController::class,'destroyTurno'])->name('turno.destroyTurno');
 
 
