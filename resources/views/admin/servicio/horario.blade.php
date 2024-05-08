@@ -51,7 +51,15 @@
                             @foreach ($medicoHorarios as $medicoHorario)
                             <tr>
                                 <td>{{ $medicoHorario->id }}</td>
-                                <td>{{ $medicoHorario->medico->nombre }}</td>
+                                <td>
+                                    @foreach ($medicos as $usuarioMedico)
+                                    @if ($usuarioMedico && $usuarioMedico->user)
+                                        <option value="{{ $usuarioMedico->user->ci }}">
+                                            {{ $usuarioMedico->user->nombres }} - {{ $usuarioMedico->user->apellido_paterno }} - {{ $usuarioMedico->user->apellido_materno }}
+                                        </option>
+                                    @endif
+                                @endforeach
+                                </td>
                                 <td>{{ $medicoHorario->horario->horaI }} - {{ $medicoHorario->horario->horaF }}</td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editarModal{{ $medicoHorario->id }}">Editar</button>
@@ -296,19 +304,27 @@
                             @endforeach
                         </select>
                     </div>
+                    
                     <div class="form-group">
-    <label for="id_medico">Médico:</label>
-    <select class="form-control" id="id_medico" name="id_medico">
-        <!-- Aquí se llenará dinámicamente con los médicos disponibles -->
-        @foreach ($medicos as $usuarioMedico)
-            @if ($usuarioMedico->rol_id == 2)
-            <option value="{{ $usuarioMedico->id }}">{{ $usuarioMedico->user->ci }} - {{ $usuarioMedico->user->nombres }} - {{ $usuarioMedico->user->apellido_paterno }} - {{ $usuarioMedico->user->apellido_materno }}</option>
-            @endif
-            
-           
-        @endforeach 
-    </select>
-</div>
+                        <label for="id_especialidades">Especialidades:</label>
+                        <select class="form-control" id="id_especialidades" name="id_especialidades">
+                            <!-- Aquí se llenará dinámicamente con los horarios disponibles -->
+                            @foreach ($especialidades as $especialidad)
+                            <option value="{{ $especialidad->id }}">{{ $especialidad->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_medico">Médico:</label>
+                        <select class="form-control" id="id_medico" name="id_medico">
+                            <!-- Aquí se llenará dinámicamente con los médicos disponibles -->
+                            @foreach ($medicos as $usuarioMedico)
+                               
+                                <option value="{{ $usuarioMedico->usuario_id }}">{{ $usuarioMedico->user->ci }} - {{ $usuarioMedico->user->nombres }} - {{ $usuarioMedico->user->apellido_paterno }} - {{ $usuarioMedico->user->apellido_materno }}</option>
+
+                            @endforeach 
+                        </select>
+                    </div>
 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 <button type="submit" class="btn btn-primary">Guardar</button>

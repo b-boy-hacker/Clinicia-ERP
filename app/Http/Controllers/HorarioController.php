@@ -7,6 +7,7 @@ use App\Models\Horario;
 use App\Models\Turno;
 use App\Models\MedicoHorario;
 use App\Models\UsuarioRol;
+use App\Models\Especialidad;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -17,11 +18,18 @@ class HorarioController extends Controller
         $turnos = Turno::all();
         $horarios =Horario::all();
         $medicoHorarios = MedicoHorario::all();
-        $medicos = UsuarioRol::all();
+        $medicos = UsuarioRol::where('rol_id', 2)->get(); 
+        $especialidades=Especialidad::all();
         $user = User::all();
-        return view('admin.servicio.horario',compact('horarios','turnos','medicoHorarios','medicos','user'));
+        $userol = UsuarioRol::all();
+        return view('admin.servicio.horario',compact('horarios','turnos','medicoHorarios',
+        'medicos','user','userol','especialidades'));
     }
 
+    public function mostrar_medico(){
+        $medico = UsuarioRol::where('rol_id', 2)->get(); 
+        return view('admin.medico.mostrar_medico', ['medico' => $medico]);
+    }
 
     public function storeTurno(Request $request)
     {
