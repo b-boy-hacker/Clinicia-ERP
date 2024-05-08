@@ -52,14 +52,11 @@
                             <tr>
                                 <td>{{ $medicoHorario->id }}</td>
                                 <td>
-                                    @foreach ($medicos as $usuarioMedico)
-                                    @if ($usuarioMedico && $usuarioMedico->user)
-                                        <option value="{{ $usuarioMedico->user->ci }}">
-                                            {{ $usuarioMedico->user->nombres }} - {{ $usuarioMedico->user->apellido_paterno }} - {{ $usuarioMedico->user->apellido_materno }}
-                                        </option>
-                                    @endif
-                                @endforeach
-                                </td>
+        {{ $medicoHorario->user->nombres }} - {{ $medicoHorario->user->apellido_paterno }} - {{ $medicoHorario->user->apellido_materno }}
+    </td>
+    <td>{{ $medicoHorario->horario->horaI }} - {{ $medicoHorario->horario->horaF }}</td>
+
+
                                 <td>{{ $medicoHorario->horario->horaI }} - {{ $medicoHorario->horario->horaF }}</td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editarModal{{ $medicoHorario->id }}">Editar</button>
