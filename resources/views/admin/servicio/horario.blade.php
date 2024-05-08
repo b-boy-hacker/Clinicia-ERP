@@ -52,9 +52,13 @@
                             <tr>
                                 <td>{{ $medicoHorario->id }}</td>
                                 <td>
-        {{ $medicoHorario->user->nombres }} - {{ $medicoHorario->user->apellido_paterno }} - {{ $medicoHorario->user->apellido_materno }}
-    </td>
-    <td>{{ $medicoHorario->horario->horaI }} - {{ $medicoHorario->horario->horaF }}</td>
+                               <!--      aquilisto -->
+                                    
+                                {{ $medicoHorario->user->nombres }} - {{ $medicoHorario->user->apellido_paterno }} - {{ $medicoHorario->user->apellido_materno }}
+                            </td>
+                            <td>{{ $medicoHorario->horario->horaI }} - {{ $medicoHorario->horario->horaF }}
+
+                            </td>
 
 
                                 <td>{{ $medicoHorario->horario->horaI }} - {{ $medicoHorario->horario->horaF }}</td>
