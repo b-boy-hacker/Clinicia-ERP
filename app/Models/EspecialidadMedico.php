@@ -13,4 +13,5 @@ class EspecialidadMedico extends Model
     {
         return $this->belongsTo(Especialidad::class, 'especialidad_id', 'id');
     }
+    
 }
