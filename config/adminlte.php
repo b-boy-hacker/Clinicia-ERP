@@ -400,7 +400,12 @@ return [
                     'text' => 'Servicio',
                     'url'  => 'index',
                     'icon' => 'fas fa-fw fa-user',
-                ],   
+                ],  
+                [
+                    'text' => 'Horario del medico',
+                    'url'  => 'mi-horario',
+                    'icon' => 'fas fa-fw fa-user',
+                ], 
             ],
         ],
         
