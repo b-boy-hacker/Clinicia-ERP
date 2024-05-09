@@ -3,6 +3,11 @@
 @section('title', 'Dashboard Administración')
 
 @section('content_header')
+
+@stop
+
+@section('content')
+   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD de Horarios</title>
@@ -10,10 +15,6 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('inicio/css/horario.css') }}" rel="stylesheet">
 
-@stop
-
-@section('content')
-   
 <div class="container mt-5">
     <h1 class="mb-4">CRUD de Horarios</h1>
     <!-- Botón para abrir el modal -->
