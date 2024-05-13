@@ -36,9 +36,8 @@ class HorarioController extends Controller
         // Validar los datos del formulario
         $request->validate([
             'nombre' => 'required',
-    
         ]);
-
+        
         // Crear un nuevo horario con los datos proporcionados
         $turno = new Turno();
         $turno->nombre = $request->nombre;
