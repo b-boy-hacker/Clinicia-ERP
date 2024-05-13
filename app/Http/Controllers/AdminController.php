@@ -262,4 +262,8 @@ class AdminController extends Controller
         $borrar->delete();
         return redirect()->back()->with('message','eliminado exitosanmente');
     }
+
+    public function ver_farmacia(){
+        return view('inicio.ver_farmacia');
+    }
 }

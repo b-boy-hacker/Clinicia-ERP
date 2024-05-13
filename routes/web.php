@@ -66,3 +66,5 @@ Route::post('/store-medico-horario', [HorarioController::class, 'storeMedicoHora
 Route::delete('/destroy/{id}',[HorarioController::class,'destroy'])->name('horario.destroy');
 Route::delete('/medico-horario-destroy/{id}',[HorarioController::class,'destroyMedicoHorario'])->name('medico-horario.destroyMedicoHorario');
 Route::delete('/destroy-turno/{id}',[HorarioController::class,'destroyTurno'])->name('turno.destroyTurno');
+
+Route::get('/ver_farmacia',[AdminController::class,'ver_farmacia']);
