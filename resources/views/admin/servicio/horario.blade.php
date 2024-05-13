@@ -394,57 +394,6 @@ $.ajax({
 
 </script>
 </div>
-<!-- Modal de creación -->
-
-<!-- <div class="modal fade" id="crearModal" tabindex="-1" role="dialog" aria-labelledby="crearModalLabel" aria-hidden="true"> -->
-
-<!-- Modal de edición -->
-<div class="modal fade" id="editarModal-{{$horario->id}}" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel-{{$horario->id}}" aria-hidden="true">
-<div class="modal-dialog" >
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="editarModalLabel">Editar Horario</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <!-- Contenido del formulario de edición aquí -->
-            <form id="editarForm" action="{{ route('horario.update',$horario->id) }}" method="POST">
-
-                @csrf
-                @method('PUT')
-                <div class="form-group">
-                    <label for="editarHoraI">Hora de Inicio:</label>
-                    <input type="time" class="form-control" id="editarHoraI" name="editarHoraI">
-                </div>
-                <div class="form-group">
-                    <label for="editarHoraF">Hora de Fin:</label>
-                    <input type="time" class="form-control" id="editarHoraF" name="editarHoraF">
-                </div>
-                <div class="form-group">
-                    <label for="editarDia">Día:</label>
-                    <input type="text" class="form-control" id="editarDia" name="editarDia">
-                </div>
-                <div class="form-group">
-                    <label for="id_turno">Turno:</label>
-                    <select class="form-control" id="id_turno" name="id_turno">
-                        @foreach ($turnos as $turno)
-                            <option value="{{ $turno->id }}">{{ $turno->nombre }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-</div>
-
-
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>

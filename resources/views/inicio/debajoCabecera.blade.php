@@ -8,9 +8,9 @@
                     <div class="item active">
                         <img src="inicio/img/slide-one.jpg" alt="">
                         <div class="carousel-caption">
-                               <h1>Bienvenido</h1>
-                               <p>Servicio de alta calidad para hombres y mujeres</p>
-                               {{-- <button>learn more</button> --}}
+                            <h1>Bienvenido</h1>
+                            <p>Servicio de alta calidad para hombres y mujeres</p>
+                            {{-- <button>learn more</button> --}}
                         </div>
                     </div>
                     <div class="item">

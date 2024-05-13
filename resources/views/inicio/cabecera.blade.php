@@ -27,6 +27,7 @@
 						<li><a class="menu active" href="#home" >Inicio</a></li>
 						{{-- <li><a class="menu" href="#about">Acerca</a></li> --}}
 						<li><a class="menu" href="#contact">contactanos</a></li>
+						<li><a class="menu" href="login">Farmacia</a></li>
 						<li><a class="menu" href="login">Iniciar Sesion</a></li>
 						<li><a class="menu" href="#team"></a></li>
 					  </ul>
