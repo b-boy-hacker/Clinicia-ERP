@@ -11,6 +11,8 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('inicio/css/horario.css') }}" rel="stylesheet">
+   
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 @section('content')
    
@@ -371,26 +373,31 @@
     </div>
 </div>
 <script>
-    function guardarTurno() {
-var formData = $('#crearTurnoForm').serialize();
 
-$.ajax({
-    type: 'POST',
-    url: '{{ route("horario.store") }}',
-    data: formData,
-    success: function(response) {
-        // Mostrar una alerta de éxito
-        alert('Turno creado exitosamente');
+function guardarTurno() {
+    var formData = $('#crearTurnoForm').serialize();
 
-        // Opcional: Limpiar el formulario o realizar otras acciones necesarias
-        $('#crearTurnoForm')[0].reset();
-    },
-    error: function(xhr, status, error) {
-        // Mostrar una alerta de error
-        alert('Error al agregar el turno: ' + error);
-    }
-});
+    // Agregar manualmente el token CSRF al objeto de datos
+    formData += '&_token={{ csrf_token() }}';
+
+    $.ajax({
+        type: 'POST',
+        url: '{{ route("horario.store") }}',
+        data: formData,
+        success: function(response) {
+            // Mostrar una alerta de éxito
+            alert('Turno creado exitosamente');
+
+            // Opcional: Limpiar el formulario o realizar otras acciones necesarias
+            $('#crearTurnoForm')[0].reset();
+        },
+        error: function(xhr, status, error) {
+            // Mostrar una alerta de error
+            alert('Error al agregar el turno: ' + error);
+        }
+    });
 }
+
 
 </script>
 </div>

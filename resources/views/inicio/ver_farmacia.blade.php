@@ -30,9 +30,7 @@
                     <a class="nav-link active btn-lg" aria-current="page"
                         href="/">INCIO</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link btn-lg" href="#contact">CONTACTANOS</a>
-                </li>
+                
                 <li class="nav-item">
                     <a class="nav-link btn-lg" href="ver_farmacia">FARMACIA</a>
                 </li>
