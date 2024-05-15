@@ -10,6 +10,7 @@ use App\Models\Turno;
 use App\Models\Horario;
 use App\Models\Servicio;
 use App\Models\MedicoHorario;
+use App\Models\EspecialidadMedico;
 class UsuarioSeeder extends Seeder
 {
     /**
@@ -97,6 +98,19 @@ class UsuarioSeeder extends Seeder
         Servicio::create([            
             'tipo_servicio' => 'Pediatria',
             'id_medico' => '2', 
+        ]);
+
+        EspecialidadMedico::create([            
+            'nombres' => 'Eunice',
+            'apellido_paterno' => 'Navarro', 
+            'apellido_materno' => 'Dorbigny',
+            'especialidad_id' => '1', 
+        ]);
+        EspecialidadMedico::create([            
+            'nombres' => 'Eunice',
+            'apellido_paterno' => 'Navarro', 
+            'apellido_materno' => 'Dorbigny',
+            'especialidad_id' => '2', 
         ]);
         
     }
