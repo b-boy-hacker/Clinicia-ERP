@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Servicio;
+use App\Models\UsuarioRol;
+use App\Models\User;
 
 class ServicioController extends Controller
 {
@@ -15,8 +17,10 @@ class ServicioController extends Controller
     {
         // Recuperar todos los servicios
         $servicios = Servicio::all();
+        $usuario = User::all();
+        $medico = UsuarioRol::where('rol_id', 2)->get(); 
         // Pasar la variable 'servicios' a la vista
-        return view( 'admin.servicio.inicio', compact('servicios'));
+        return view( 'admin.servicio.inicio', compact('servicios','medico','usuario'));
     }
     /**
      * Show the form for creating a new resource.
@@ -44,6 +48,7 @@ class ServicioController extends Controller
         'id' => $nextId,  // Solo si realmente necesitas 
                           // asignarlo manualmente
         'tipo_servicio' => $request->tipo_servicio,
+        'id_medico' => $request->id_medico,
     ]);
 
     // Guardar el nuevo servicio en la base de datos
@@ -77,7 +82,8 @@ class ServicioController extends Controller
     public function update(Request $request, $id)
 {
     $request->validate([
-        'tipo_servicio' => 'required|string|max:250'
+        'tipo_servicio' => 'required|string|max:250',
+        'id_medico' => 'required|integer'
     ]);
 
     $servicio = Servicio::findOrFail($id);

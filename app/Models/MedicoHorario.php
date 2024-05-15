@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class MedicoHorario extends Model
 {
     use HasFactory;
-    protected $table = 'medico_horario';
+    protected $table = 'medico_horarios';
     protected $fillable = [
         'id_horario',
         'id_medico',

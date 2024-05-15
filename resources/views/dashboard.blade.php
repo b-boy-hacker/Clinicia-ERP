@@ -9,3 +9,7 @@
 @section('content')
    
 @stop --}}
+
+<x-app-layout>
+    
+</x-app-layout>

@@ -406,7 +406,7 @@ function guardarTurno() {
 <!-- <div class="modal fade" id="crearModal" tabindex="-1" role="dialog" aria-labelledby="crearModalLabel" aria-hidden="true"> -->
 
 <!-- Modal de edición -->
-<div class="modal fade" id="editarModal-{{$horario->id}}" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel-{{$horario->id}}" aria-hidden="true">
+{{-- <div class="modal fade" id="editarModal-{{$horario->id}}" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel-{{$horario->id}}" aria-hidden="true">
 <div class="modal-dialog" >
     <div class="modal-content">
         <div class="modal-header">
@@ -449,7 +449,7 @@ function guardarTurno() {
         </div>
     </div>
 </div>
-</div>
+</div> --}}
 
 
 

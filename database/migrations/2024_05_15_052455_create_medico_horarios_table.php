@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('medico_horarios', function (Blueprint $table) {
             $table->id();
-
-            $table->foreignId('id_horario')->constrained('horario')->onDelete('cascade')->onUpdate('cascade');
-            $table->unsignedBigInteger('id_medico');
             
-            $table->foreignId('id_especialidades')->constrained('especialidads')->onDelete('cascade')->onUpdate('cascade'); // Cambiar 'especialidades' por el nombre de tu tabla de especialidades
+            $table->foreignId('id_horario')->constrained('horarios')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('id_medico');
+            $table->foreignId('id_especialidades')->constrained('especialidads')->onDelete('cascade')->onUpdate('cascade'); 
 
 
             $table->timestamps();
