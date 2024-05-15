@@ -266,4 +266,6 @@ class AdminController extends Controller
     public function ver_farmacia(){
         return view('inicio.ver_farmacia');
     }
+
+    
 }

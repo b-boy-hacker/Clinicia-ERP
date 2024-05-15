@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('horarios', function (Blueprint $table) {
+        Schema::create('servicios', function (Blueprint $table) {
             $table->id();
 
-            $table->time('horaI');
-            $table->time('horaF');
-            $table->string('dia', 50);
-            $table->foreignId('id_turno')->constrained('turno')->onDelete('cascade')->onUpdate('cascade');
-
+            $table->string('tipo_servicio');
+            $table->unsignedBigInteger('id_medico');
+            
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('horarios');
+        Schema::dropIfExists('servicios');
     }
 };
