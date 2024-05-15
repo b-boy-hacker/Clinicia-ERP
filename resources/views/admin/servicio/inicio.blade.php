@@ -47,7 +47,7 @@
                     <select class="text_color" name="id_medico" required="">
                         <option value="" selected>Seleccionar Medico...</option>
                             @foreach ($medico as $user)
-                                <option value="{{ $user->id}}">{{ $user->user->id}}
+                                <option value="{{ $user->user->id}}">{{ $user->user->id}}
                                     ...{{ $user->user->nombres}}</option>
                             @endforeach
                     </select>
