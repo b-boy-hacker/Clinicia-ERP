@@ -12,6 +12,7 @@ use App\Models\UsuarioRol;
 use App\Models\Servicio;
 use App\Models\Especialidad;
 use App\Models\EspecialidadMedico;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 
@@ -96,6 +97,8 @@ class AdminController extends Controller
         $rol = Rol::all();
          return view('admin/usuario/mostrar_usuario', compact('usuario', 'rol'));
     }
+
+    
 
     // public function mostrar_usuario(){
     //     $usuario = User::all(); // Suponiendo que Profesor es el modelo que representa la tabla de profesores
@@ -199,6 +202,27 @@ class AdminController extends Controller
         return view('admin.medico.mostrar_medico', ['medico' => $medico]);
     }
 
+    // public function pdf(){
+    //     // Obtén solo los usuarios que tienen el rol de médico
+    //     $medicos = UsuarioRol::where('rol_id', 2)->get(); 
+        
+    //     // Carga la vista 'pdf' y pasa la variable $medicos
+    //     $pdf = PDF::loadView('admin.medico.pdf', compact('medicos')); 
+        
+    //     // Muestra el PDF en el navegador con el nombre 'medicos.pdf'
+    //     return $pdf->stream('medicos.pdf'); 
+    // }
+    public function pdf(){
+        // Obtén solo los usuarios que tienen el rol de médico
+        $usuariosMedicos = UsuarioRol::where('rol_id', 2)->with('user')->get(); 
+        
+        // Carga la vista 'pdf' y pasa la variable $usuariosMedicos
+        $pdf = PDF::loadView('admin.medico.pdf', compact('usuariosMedicos')); 
+        
+        // Muestra el PDF en el navegador con el nombre 'medicos.pdf'
+        return $pdf->stream('medicos.pdf'); 
+    }
+
    public function mostrar_paciente(){
         $paciente = UsuarioRol::where('rol_id', 3)->get(); 
         return view('admin.paciente.mostrar_paciente', ['paciente' => $paciente]);
@@ -237,6 +261,7 @@ class AdminController extends Controller
         return view('admin.especialidad_medico.ver_esp_medico',
         compact('espMed','especialidad','medico'));//, ['usuario' => $usuario]);
     }
+    
 
     public function crear_esp_medico(Request $request){
         $especialidad = new EspecialidadMedico;

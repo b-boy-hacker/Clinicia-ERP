@@ -20,7 +20,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
-
+Route::get('/mostrar_medico/pdf', [AdminController::class, 'pdf'])->name('pdf');
 Route::get('redirigir', [AdminController::class, 'redirigir']);
 Route::get('inicio', [AdminController::class, 'inicio']);
 Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
@@ -30,6 +30,7 @@ Route::get('/crear_usuario', [AdminController::class, 'crear_usuario']);
 Route::post('/crear_nuevo_usuario', [AdminController::class, 'crear_nuevo_usuario']);
 Route::post('/editar_Usuario/{id}', [AdminController::class, 'editar_Usuario']);
 Route::delete('/borrar_Usuario/{id}', [AdminController::class, 'borrar_Usuario']);
+
 
 Route::get('/mostrar_medico', [AdminController::class, 'mostrar_medico']);
 Route::get('/mostrar_paciente', [AdminController::class, 'mostrar_paciente']);
