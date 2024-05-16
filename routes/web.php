@@ -20,6 +20,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+Route::get('/mostrar_paciente/pdf', [AdminController::class, 'pdf_paciente'])->name('pdf_paciente');
 Route::get('/mostrar_medico/pdf', [AdminController::class, 'pdf'])->name('pdf');
 Route::get('redirigir', [AdminController::class, 'redirigir']);
 Route::get('inicio', [AdminController::class, 'inicio']);

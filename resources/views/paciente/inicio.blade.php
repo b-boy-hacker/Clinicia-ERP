@@ -17,6 +17,7 @@
       <div class="container">
        
          <h1>Paciente</h1>
+         <h2>Hola mundo</h2>
         
          @include('admin.usuario.modalCrear')
      

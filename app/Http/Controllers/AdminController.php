@@ -227,6 +227,16 @@ class AdminController extends Controller
         $paciente = UsuarioRol::where('rol_id', 3)->get(); 
         return view('admin.paciente.mostrar_paciente', ['paciente' => $paciente]);
     }
+    public function pdf_paciente(){
+        // Obtén solo los usuarios que tienen el rol de médico
+        $usuariosPacientes = UsuarioRol::where('rol_id', 3)->get();
+        
+        // Carga la vista 'pdf' y pasa la variable $usuariosMedicos
+        $pdf = PDF::loadView('admin.paciente.pdf_paciente', compact('usuariosPacientes')); 
+        
+        // Muestra el PDF en el navegador con el nombre 'medicos.pdf'
+        return $pdf->stream('paciente.pdf_paciente'); 
+    }
 //-------------------------------------------------------------------------------
 
     public function mostrar_especialidad(){
