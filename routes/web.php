@@ -70,3 +70,32 @@ Route::delete('/destroy-turno/{id}',[HorarioController::class,'destroyTurno'])->
 Route::get('/ver_farmacia',[AdminController::class,'ver_farmacia']);
 Route::get('/mostrar_paciente/pdf', [AdminController::class, 'pdf_paciente'])->name('pdf_paciente');
 Route::get('/mostrar_medico/pdf', [AdminController::class, 'pdf'])->name('pdf');
+
+
+use App\Http\Controllers\CatEquipoMedicoController;
+Route::get('/cat-equipo-medico', [CatEquipoMedicoController::class, 'index'])->name('CatEquipoMedico.index');
+Route::post('/catequipoM', [CatEquipoMedicoController::class, 'store'])->name('CatEquipoMedico.store');
+Route::put('/catequipoM/{id}', [CatEquipoMedicoController::class, 'update'])->name('CatEquipoMedico.update');
+Route::delete('/catequipoMdestroy/{id}',[CatEquipoMedicoController::class,'destroy'])->name('CatEquipoMedico.destroy');
+//Route::resource('cat-equipo-medico', 'CatEquipoMedicoController');
+
+use App\Http\Controllers\EquipoMedicoController;
+Route::get('/equipo-medico', [EquipoMedicoController::class, 'index'])->name('EquipoMedico.index');
+Route::post('/equipoM', [EquipoMedicoController::class, 'store'])->name('EquipoMedico.store');
+Route::put('/equipoM/{id}', [EquipoMedicoController::class, 'update'])->name('EquipoMedico.update');
+Route::delete('/equipoMdestroy/{id}',[EquipoMedicoController::class,'destroy'])->name('EquipoMedico.destroy');
+
+use App\Http\Controllers\EmergenciaController;
+Route::get('/sala_emergencia', [EmergenciaController::class, 'sala_emergencia']);
+Route::post('/crearSalaEmergencia', [EmergenciaController::class, 'crearSalaEmergencia']);
+Route::delete('/borrar_sala/{id}', [EmergenciaController::class, 'borrar_sala']);
+
+Route::get('/categoria_emergencia', [EmergenciaController::class, 'categoria_emergencia']);
+Route::post('/crearCategoriaEmergencia', [EmergenciaController::class, 'crearCategoriaEmergencia']);
+Route::delete('/borrar_categoria/{id}', [EmergenciaController::class, 'borrar_categoria']);
+Route::get('/emergencia', [EmergenciaController::class, 'emergencia']);
+Route::post('/crearEmergencia', [EmergenciaController::class, 'crearEmergencia']);
+Route::delete('/borrar_emergencia/{id}', [EmergenciaController::class, 'borrar_emergencia']);
+Route::post('/editar_sala/{id}', [EmergenciaController::class, 'editar_sala']);
+Route::post('/editar_categoria/{id}', [EmergenciaController::class, 'editar_categoria']);
+Route::post('/editar_emergencia/{id}', [EmergenciaController::class, 'editar_emergencia']);

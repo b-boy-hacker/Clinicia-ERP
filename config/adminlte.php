@@ -399,16 +399,48 @@ return [
                 [
                     'text' => 'Servicio',
                     'url'  => 'index',
-                    'icon' => 'fas fa-fw fa-user',
+                   // 'icon' => 'fas fa-fw fa-user',
                 ],  
                 [
                     'text' => 'Horario del medico',
                     'url'  => 'mi-horario',
-                    'icon' => 'fas fa-fw fa-user',
+                   // 'icon' => 'fas fa-fw fa-hour',
                 ], 
             ],
         ],
-        
+        [
+            'text'    => 'Gestionar Equipo',
+            'submenu' => [
+                [
+                    'text' => 'Equipo-medico',
+                    'url'  => 'cat-equipo-medico',
+                   // 'icon' => 'fas fa-fw fa-user',
+                ],           
+            ],
+        ],
+        [
+            'text'    => 'Gestionar Emergencias',
+            'submenu' => [
+                [
+                    'text' => 'Salas de emergencia',
+                    'url'  => 'sala_emergencia',
+                    //'icon' => 'fas fa-fw fa-user',
+                ],  
+                [
+                    'text' => 'Categoria de emergencia',
+                    'url'  => 'categoria_emergencia',
+                    // 'icon' => 'fas fa-fw fa-user',
+                ],
+                [
+                    'text' => 'Registro de emergencia',
+                    'url'  => 'emergencia',
+                    //'icon' => 'fas fa-fw fa-user',
+                ],  
+                       
+            ],
+        ],
+
+
        
     ],
 

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class CatEquipoMedico extends Model
 {
     use HasFactory;
+    protected $table = 'cat_equipo_medicos';
+    protected $fillable = [
+        'nombre',
+        'descripcion',
+    ];
 }
