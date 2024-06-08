@@ -24,6 +24,7 @@
 <div class="container">
     
     <h1>Lista de Medicos</h1>
+    <a href="{{ route('pdf') }}" class="btn btn-success">Descargar PDF</a>
    
     @include('admin.usuario.modalCrear')
 
