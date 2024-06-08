@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sala__emergencias', function (Blueprint $table) {
+        Schema::create('equipo_medicos', function (Blueprint $table) {
             $table->id();
 
             $table->string('nombre');
-            
+            $table->text('descripcion')->nullable();
+            $table->unsignedInteger('id_categoria');
+            $table->foreign('id_categoria')->references('id')->on('cat_equipo_medicos');
+
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sala__emergencias');
+        Schema::dropIfExists('equipo_medicos');
     }
 };
