@@ -12,6 +12,7 @@ use App\Models\UsuarioRol;
 use App\Models\Servicio;
 use App\Models\Especialidad;
 use App\Models\EspecialidadMedico;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 
@@ -267,5 +268,25 @@ class AdminController extends Controller
         return view('inicio.ver_farmacia');
     }
 
+    public function pdf(){
+        // Obtén solo los usuarios que tienen el rol de médico
+        $usuariosMedicos = UsuarioRol::where('rol_id', 2)->with('user')->get(); 
+        
+        // Carga la vista 'pdf' y pasa la variable $usuariosMedicos
+        $pdf = PDF::loadView('admin.medico.pdf', compact('usuariosMedicos')); 
+        
+        // Muestra el PDF en el navegador con el nombre 'medicos.pdf'
+        return $pdf->stream('medicos.pdf'); 
+    }
     
+    public function pdf_paciente(){
+        // Obtén solo los usuarios que tienen el rol de médico
+        $usuariosPacientes = UsuarioRol::where('rol_id', 3)->get();
+        
+        // Carga la vista 'pdf' y pasa la variable $usuariosMedicos
+        $pdf = PDF::loadView('admin.paciente.pdf_paciente', compact('usuariosPacientes')); 
+        
+        // Muestra el PDF en el navegador con el nombre 'medicos.pdf'
+        return $pdf->stream('paciente.pdf_paciente'); 
+    }
 }

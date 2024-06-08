@@ -37,7 +37,8 @@
                             </div>
                         @endif
     <h1>Lista de Pacientes</h1>
-   
+    <a href="{{ route('pdf_paciente') }}" class="btn btn-success">Descargar PDF</a>
+
 
     @include('admin.usuario.modalCrear')
 

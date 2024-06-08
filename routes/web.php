@@ -68,3 +68,5 @@ Route::delete('/medico-horario-destroy/{id}',[HorarioController::class,'destroyM
 Route::delete('/destroy-turno/{id}',[HorarioController::class,'destroyTurno'])->name('turno.destroyTurno');
 
 Route::get('/ver_farmacia',[AdminController::class,'ver_farmacia']);
+Route::get('/mostrar_paciente/pdf', [AdminController::class, 'pdf_paciente'])->name('pdf_paciente');
+Route::get('/mostrar_medico/pdf', [AdminController::class, 'pdf'])->name('pdf');
