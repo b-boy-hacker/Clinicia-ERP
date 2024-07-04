@@ -32,23 +32,27 @@
             {{ session('error') }}
         </div>
     @endif
-    <h1>Lista de Especialidades</h1>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearEsp">
-        Agregar especialidad
+    <h1>Lista de oferta de servicio</h1>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearOferta">
+        Agregar oferta
     </button>
 
         <table class="table table-bordered mt-4">
             <thead>
                 <tr>
                     <th>ID</th> 
-                    <th>Especialidad</th>                             
+                    <th>Especialidad</th>  
+                    <th>Descipcion</th>
+                    <th>Descuento</th>
+                    <th>Fecha Inicio</th> 
+                    <th>Fecha Final</th>                         
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($especialidad as $especialidades)
+                {{-- @foreach ($especialidad as $especialidades) --}}
                 <tr>
-                    <td>{{$especialidades->id}}</td>
+                    {{-- <td>{{$especialidades->id}}</td>
                     <td>{{$especialidades->nombre}}
                         <td>
                             <button href="{{url('editar_especialidad', $especialidades->id)}}" type="button" 
@@ -72,14 +76,14 @@
                         </td>  
                         <td>
                             
-                        </td>
+                        </td> --}}
     
                 </tr>
-                @endforeach  
+                {{-- @endforeach   --}}
             </tbody>
         </table>
     
-    @include('admin.especialidad.modalCrear')
+    @include('admin.ofertaServicio.crear')
 </div>
-    @stop
+@stop
 

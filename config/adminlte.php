@@ -440,6 +440,27 @@ return [
             ],
         ],
 
+        [
+            'text'    => 'Gestionar oferta',
+            'submenu' => [
+                [
+                    'text' => 'Oferta',
+                    'url'  => 'ver_oferta',
+                   // 'icon' => 'fas fa-fw fa-user',
+                ],           
+            ],
+        ],
+
+        [
+            'text'    => 'Gestionar Farmacia',
+            'submenu' => [
+                [
+                    'text' => 'farmacia',
+                    'url'  => 'GestionFarmacia',
+                   // 'icon' => 'fas fa-fw fa-user',
+                ],           
+            ],
+        ],
 
        
     ],

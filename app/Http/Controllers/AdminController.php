@@ -12,8 +12,21 @@ use App\Models\UsuarioRol;
 use App\Models\Servicio;
 use App\Models\Especialidad;
 use App\Models\EspecialidadMedico;
+use App\Models\Consultorio;
+use App\Models\ConsultaMedica;
+use App\Models\Categoria;
+use App\Models\Producto;
+use App\Models\Horario;
+use App\Models\RecetaMedica;
+use App\Models\MedicoHorario;
+use App\Models\EstadoConsulta;
+use App\Models\Laboratorio;
+
 use Barryvdh\DomPDF\Facade\Pdf;
 
+use TCPDF;
+use Illuminate\Support\Facades\DB;
+// use Barryvdh\DomPDF\Facade as PDF;
 
 
 
@@ -49,10 +62,34 @@ class AdminController extends Controller
                 return view('admin.inicio'); // Redirige al usuario a la vista de administrador
             }
             elseif ($rolId == 2){
-                return view('medico.inicio'); // Redirige al usuario a la vista de médico
+                // Obtener las consultas médicas que no están finalizadas
+                $medicoId = Auth::id();
+
+                $consultas = ConsultaMedica::whereHas('consultorio', function ($query) use ($medicoId) {
+                    $query->where('id_medico', $medicoId);
+                })->get();
+                
+                 return view('medico.inicio', ['consultas' => $consultas]);
+                //return view('medico.inicio',compact('consultas')); // Redirige al usuario a la vista de médico
             }
             elseif ($rolId == 3){
-                return view('paciente.inicio'); // Redirige al usuario a la vista de paciente
+                $consultas=Consultorio::All();
+                $consultamedicas=ConsultaMedica::All();
+                $especialidades=Especialidad::All();
+                $medicos = UsuarioRol::where('rol_id', 2)->get(); 
+                $horarios=Horario::All();
+
+               
+                $pacienteId = Auth::id();
+               // $paciente = Paciente::with('laboratorios')->find($pacienteId);
+               $user = Auth::user();
+                // Obtiene las recetas médicas del paciente autenticado
+                $recetas = RecetaMedica::whereHas('consultaMedica', function ($query) use ($pacienteId) {
+                    $query->where('id_paciente', $pacienteId);
+                })->get();
+                $laboratorios = Laboratorio::where('id', $user->id)->get();
+                // return view('paciente.inicio', compact('recetas'));
+                return view('paciente.inicio',compact('laboratorios','especialidades','medicos','horarios','recetas')); // Redirige al usuario a la vista de paciente
             }
         }
         
@@ -60,6 +97,57 @@ class AdminController extends Controller
         return view('admin.inicio');
     }
     
+
+    public function mostrarLaboratorios()
+    {
+        // Obtener el usuario autenticado
+        $user = Auth::user();
+
+        // Obtener los laboratorios del usuario autenticado a través de sus consultas médicas
+        $laboratorios = Laboratorio::whereHas('consultaMedica', function ($query) use ($user) {
+            $query->where('id_paciente', $user->id);
+        })->get();
+
+        // Pasar los laboratorios a la vista
+        return view('paciente.inicio', ['laboratorios' => $laboratorios]);
+    }
+    public function obtenerMedicos(Request $request)
+    {
+        $especialidadId = $request->input('especialidad_id');
+
+        // Realizar la consulta para obtener los nombres e IDs de los médicos
+        $medicos = User::whereIn('id', function($query) use ($especialidadId) {
+            $query->select('id_medico')
+                ->from('medico_horarios')
+                ->join('especialidads', 'especialidads.id', '=', 'medico_horarios.id_especialidades')
+                ->where('especialidads.id', $especialidadId);
+        })->select('id', 'nombres')->get();
+
+        // Devolver los médicos en formato JSON
+        return response()->json($medicos);
+    }
+
+
+    public function obtenerHorarios(Request $request)
+    {
+        $medicoId = $request->input('medico_id');
+
+        // Agregar una declaración de depuración para verificar el ID del médico
+        \Log::info('ID del médico recibido:', ['medico_id' => $medicoId]);
+
+        // Realizar la consulta para obtener los horarios disponibles para el médico seleccionado
+        $horarios = MedicoHorario::join('horarios', 'medico_horarios.id_horario', '=', 'horarios.id')
+            ->join('turnos', 'horarios.id_turno', '=', 'turnos.id')
+            ->where('medico_horarios.id_medico', $medicoId)
+            ->select('horarios.id','horarios.horaI', 'horarios.horaF', 'horarios.dia', 'turnos.nombre')
+            ->get();
+            $horariosArray = $horarios->toArray();
+        // Agregar una declaración de depuración para verificar los horarios obtenidos
+        \Log::info('Horarios obtenidos:', $horariosArray);
+
+        // Devolver los horarios en formato JSON
+        return response()->json($horarios);
+    }
 
     public function otraManera()
     {
@@ -289,4 +377,58 @@ class AdminController extends Controller
         // Muestra el PDF en el navegador con el nombre 'medicos.pdf'
         return $pdf->stream('paciente.pdf_paciente'); 
     }
+
+
+    public function generatePDF(Request $request)
+    {
+        $rol = $request->input('rol'); // Obtener el rol filtrado desde el request
+        $atributos = $request->input('atributos', [
+            'ci', 'nombres', 'apellido_paterno', 'apellido_materno', 'sexo', 'telefono', 'direccion', 'email'
+        ]); // Obtener los atributos seleccionados (con valores por defecto)
+        $fechaRegistro = $request->input('fecha_registro');
+    
+        // Construir la consulta SQL para obtener los usuarios según el rol
+        $query = DB::table('users')
+            ->join('usuario_rols', 'users.id', '=', 'usuario_rols.usuario_id')
+            ->join('rols', 'usuario_rols.rol_id', '=', 'rols.id')
+            ->where('rols.rol', $rol)
+            ->select($atributos);
+    
+        // Aplicar filtro por fecha de registro si está definida
+        if ($fechaRegistro) {
+            $query->whereDate('users.created_at', '=', $fechaRegistro);
+        }
+    
+        // Ejecutar la consulta
+        $usuarios = $query->get();
+    
+        // Depurar para ver el contenido de $usuarios
+        if ($usuarios->isEmpty()) {
+            dd('No se encontraron usuarios con los filtros especificados.');
+        }
+    
+        // Crear una nueva instancia de TCPDF
+        $pdf = new TCPDF();
+    
+        // Configurar el documento PDF
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('Tu Nombre');
+        $pdf->SetTitle('Usuarios');
+        $pdf->SetSubject('Listado de Usuarios');
+        $pdf->SetKeywords('TCPDF, PDF, usuarios, listado');
+    
+        // Agregar una página
+        $pdf->AddPage();
+    
+        // Crear el contenido del PDF
+        $html = view('pdf.usuarios', compact('usuarios', 'atributos'))->render();
+    
+        // Escribir el contenido en el PDF
+        $pdf->writeHTML($html, true, false, true, false, '');
+    
+        // Descargar el PDF
+        $pdf->Output('usuarios.pdf', 'D');
+    }
+
+
 }

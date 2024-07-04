@@ -44,6 +44,40 @@
 
     @include('admin.usuario.modalCrear')
 
+    <!-- Formulario para seleccionar filtros y atributos -->
+    <form action="{{ route('usuarios.pdf') }}" method="GET">
+        <div class="form-group">
+            <label for="rol">Filtrar por Rol:</label>
+            <select name="rol" id="rol" class="form-control">
+                <option value="">Todos</option>
+                <option value="Medico">Medico</option>
+                <option value="Paciente">Paciente</option>
+            </select>
+        </div>
+    
+        <div class="form-group">
+            <label for="atributos">Seleccionar Atributos:</label>
+            <select name="atributos[]" id="atributos" class="form-control" multiple>
+                <option value="ci">CI</option>
+                <option value="nombres">Nombres</option>
+                <option value="apellido_paterno">Apellido Paterno</option>
+                <option value="apellido_materno">Apellido Materno</option>
+                <option value="sexo">Sexo</option>
+                <option value="telefono">Telefono</option>
+                <option value="direccion">Direccion</option>
+                <option value="email">Correo</option>
+            </select>
+        </div>
+        <div class="form-group">
+        <label for="fecha">Fecha de Registro:</label>
+        <input type="date" name="fecha_registro" id="fecha_registro" class="form-control">
+    </div>
+    
+        <button type="submit" class="btn btn-primary">Descargar PDF</button>
+    </form>
+
+    
+
     <table class="table table-bordered mt-4">
         <thead>
             <tr>
