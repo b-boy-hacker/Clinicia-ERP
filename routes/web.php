@@ -67,6 +67,17 @@ Route::delete('/destroy/{id}',[HorarioController::class,'destroy'])->name('horar
 Route::delete('/medico-horario-destroy/{id}',[HorarioController::class,'destroyMedicoHorario'])->name('medico-horario.destroyMedicoHorario');
 Route::delete('/destroy-turno/{id}',[HorarioController::class,'destroyTurno'])->name('turno.destroyTurno');
 
+//agregado para las consultas
+Route::post('/consultorio-horario', [HorarioController::class, 'storeConsultorio'])->name('consultorio.storeConsultorio');
+Route::delete('/destroy-consultorio/{id}',[HorarioController::class,'destroyConsultorio'])->name('consultorio.destroyConsultorio');
+
+Route::get('/obtener-medicos', [AdminController::class, 'obtenerMedicos'])->name('obtener.medicos');
+Route::get('/obtener-horarios', [AdminController::class, 'obtenerHorarios'])->name('obtener.horarios');
+
+
+//obtener lo del cupo : 
+Route::post('/medico/cupo', [HorarioController::class, 'showMedicoHorarios']);
+
 Route::get('/ver_farmacia',[AdminController::class,'ver_farmacia']);
 Route::get('/mostrar_paciente/pdf', [AdminController::class, 'pdf_paciente'])->name('pdf_paciente');
 Route::get('/mostrar_medico/pdf', [AdminController::class, 'pdf'])->name('pdf');
@@ -99,3 +110,71 @@ Route::delete('/borrar_emergencia/{id}', [EmergenciaController::class, 'borrar_e
 Route::post('/editar_sala/{id}', [EmergenciaController::class, 'editar_sala']);
 Route::post('/editar_categoria/{id}', [EmergenciaController::class, 'editar_categoria']);
 Route::post('/editar_emergencia/{id}', [EmergenciaController::class, 'editar_emergencia']);
+
+use App\Http\Controllers\OfertaController;
+Route::get('/ver_oferta', [OfertaController::class, 'ver_oferta']);
+Route::post('/crearOferta', [OfertaController::class, 'crearOferta']);
+Route::delete('/borrarOferta/{id}', [OfertaController::class, 'borrarOferta']);
+Route::post('/editarOferta/{id}', [OfertaController::class, 'editarOferta']);
+
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\PedidoController;
+
+//Route::resource('GestionFarmacia-categoria', CategoriaController::class);
+Route::post('GestionFarmacia-categoria',[CategoriaController::class,'store'])->name('GestionFarmacia-categoria.store');
+Route::put('GestionFarmacia-categoria/{id}', [CategoriaController::class,'update'])->name('GestionFarmacia-categoria.update');
+Route::delete('GestionFarmacia-categoria/{id}',[CategoriaController::class,'destroy'])->name('GestionFarmacia-categoria.destroy');
+
+//Route::resource('GestionFarmacia-proveedor', ProveedorController::class);
+Route::post('GestionFarmacia-proveedor',[ProveedorController::class,'store'])->name('GestionFarmacia-proveedor.store');
+Route::put('/GestionFarmacia-proveedor/{id}', [ProveedorController::class, 'update'])->name('GestionFarmacia-proveedor.update');
+Route::delete('GestionFarmacia-proveedor/{id}',[ProveedorController::class,'destroy'])->name('GestionFarmacia-proveedor.destroy');
+
+//Route::resource('GestionFarmacia', ProductoController::class);
+Route::get('GestionFarmacia', [ProductoController::class, 'index'])->name('GestionFarmacia.index');
+
+Route::post('GestionFarmacia-Pro',[ProductoController::class,'store'])->name('GestionFarmacia-Pro.store');
+Route::put('/GestionFarmacia-Pro/{id}', [ProductoController::class, 'update'])->name('GestionFarmacia-Pro.update');
+Route::delete('GestionFarmacia-Pro/{id}',[ProductoController::class,'destroy'])->name('GestionFarmacia-Pro.destroy');
+
+
+//Route::resource('GestionFarmacia-pedidos', PedidoController::class);
+Route::post('GestionFarmacia-pedidos',[PedidoController::class,'store'])->name('GestionFarmacia-pedidos.store');
+Route::put('/GestionFarmacia-pedidos/{id}', [PedidoController::class, 'update'])->name('GestionFarmacia-pedidos.update');
+Route::delete('GestionFarmacia-pedidos/{id}',[PedidoController::class,'destroy'])->name('GestionFarmacia-pedidos.destroy');
+
+
+Route::get('/usuarios/pdf', [AdminController::class, 'generatePDF'])->name('usuarios.pdf');
+
+
+// routes/web.php
+use App\Http\Controllers\FarmaciaController;
+Route::get('/farmacia/productos', [FarmaciaController::class, 'productos'])->name('farmacia.productos');
+
+Route::get('pago-T', [FarmaciaController::class, 'pagoTarjeta'])->name('pago-T');
+Route::post('/procesar-pago', [FarmaciaController::class, 'procesarPago'])->name('procesar-pago');
+
+
+use App\Http\Controllers\ConsultaMedicaControlador;
+//use App\Http\Controllers\CitaController;
+
+//Route::get('/paciente/recetas', [ConsultaMedicaControlador::class, 'mostrarRecetas'])->name('paciente.recetas');
+
+
+
+use App\Http\Controllers\MedicoController;
+Route::get('/medicos', [MedicoController::class, 'index'])->name('medicos.index');
+Route::post('/medicos/{id}/estado', [MedicoController::class, 'updateEstado'])->name('medicos.updateEstado');
+Route::post('/medicos/{id}/receta', [MedicoController::class, 'storeReceta'])->name('medicos.storeReceta');
+Route::post('/medicos/receta/{id}/editar', [MedicoController::class, 'updateReceta'])->name('medicos.updateReceta');
+Route::post('/medicos/{id}/laboratorio', [MedicoController::class, 'storeLaboratorio'])->name('medicos.storeLaboratorio');
+
+Route::get('/paciente/laboratorios', [AdminController::class, 'mostrarLaboratorios'])->name('paciente.mostrarLaboratorios');
+
+//use App\Http\Controllers\CitaController;
+
+Route::post('/guardar-cita', [ConsultaMedicaControlador::class, 'guardarCita'])->name('guardar-cita');
+Route::get('/obtener-consulta-medica', [ConsultaMedicaControlador::class, 'obtenerConsultaMedica'])->name('obtener-consulta-medica');
+Route::delete('/eliminar-horario/{id}', [ConsultaMedicaControlador::class, 'eliminarHorario'])->name('eliminar-horario');

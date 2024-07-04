@@ -8,6 +8,8 @@ use App\Models\Turno;
 use App\Models\MedicoHorario;
 use App\Models\UsuarioRol;
 use App\Models\Especialidad;
+use App\Models\Consultorio;
+
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -22,10 +24,13 @@ class HorarioController extends Controller
         $especialidades=Especialidad::all();
         $user = User::all();
         $userol = UsuarioRol::all();
+        $consultorios=Consultorio::All();
+       
         return view('admin.servicio.horario',compact('horarios','turnos','medicoHorarios',
-        'medicos','user','userol','especialidades'));
+        'medicos','user','userol','especialidades','consultorios'));
     }
 
+    
     public function mostrar_medico(){
         $medico = UsuarioRol::where('rol_id', 2)->get(); 
         return view('admin.medico.mostrar_medico', ['medico' => $medico]);
@@ -36,8 +41,9 @@ class HorarioController extends Controller
         // Validar los datos del formulario
         $request->validate([
             'nombre' => 'required',
+    
         ]);
-        
+
         // Crear un nuevo horario con los datos proporcionados
         $turno = new Turno();
         $turno->nombre = $request->nombre;
@@ -48,6 +54,22 @@ class HorarioController extends Controller
 
         
     }
+    public function storeConsultorio(Request $request)
+    {
+        // Validar los datos del formulario
+        $request->validate([
+            'nombre' => 'required',
+            'id_medico' => 'required',
+        ]);
+
+        // Crear un nuevo registro de medico_horario con los datos proporcionados
+        Consultorio::create($request->all());
+
+        // Redireccionar con un mensaje de éxito
+        return redirect()->route('horario.mostrarVista')->with('success', 'Consultorio creado exitosamente.');
+       // return redirect()->route('medico-horario.index')->with('success', 'Medico-Horario creado exitosamente.');
+    }
+
 
     public function storeMedicoHorario(Request $request)
     {
@@ -91,24 +113,26 @@ class HorarioController extends Controller
     }
     public function update(Request $request, $id)
     {
+        
         // Validar los datos del formulario
         $request->validate([
-            'editarHoraI' => 'required',
-            'editarHoraF' => 'required',
-            'editarDia' => 'required'
+            'horaI' => 'required',
+            'horaF' => 'required',
+            'dia' => 'required',
+            'id_turno' => 'required'
         ]);
-
-        // Encontrar el horario a actualizar
-        $horario = Horario::find($id);
+        $horario = Horario::findOrFail($id);
 
         if (!$horario) {
             return response()->json(['message' => 'Horario no encontrado'], 404);
         }
+        // Encontrar el horario a actualizar
+        
 
         // Actualizar los datos del horario
-        $horario->horaI = $request->editarHoraI;
-        $horario->horaF = $request->editarHoraF;
-        $horario->dia = $request->editarDia;
+        $horario->horaI = $request->horaI;
+        $horario->horaF = $request->horaF;
+        $horario->dia = $request->dia;
         $horario->id_turno = $request->id_turno;
         $horario->save();
 
@@ -152,11 +176,41 @@ class HorarioController extends Controller
         // Redireccionar con un mensaje de éxito
         return redirect()->route('horario.mostrarVista')->with('success', 'Medico-Horario eliminado correctamente.');
     }
+
+    public function destroyConsultorio($id)
+    {
+        $consultorios = Consultorio::findOrFail($id);
+        $consultorios->delete();
+        return redirect()->route('horario.mostrarVista')->with('success', 'Consultorio eliminado con éxito.');
+    }
+
     public function destroy($id)
     {
         $horario = Horario::findOrFail($id);
         $horario->delete();
         return redirect()->route('horario.mostrarVista')->with('success', 'horario eliminado con éxito.');
     }
-   
+
+    public function showMedicoHorarios($id_medico)
+    {
+        $cupo = DB::table('medico_horarios')
+            ->where('id_medico', $id_medico)
+            ->count();
+
+        $consultorios = Consultorio::with('medico')->get();
+        return view('admin.servicio.horario', compact('cupo', 'consultorios'));
+    }
+    /*public function showMedicoHorarios(Request $request)
+    {
+        // Validar el request para asegurarse de que id_medico es proporcionado y es un número
+        $validated = $request->validate([
+            'id_medico' => 'required|integer',
+        ]);
+
+        // Contar el número de registros donde id_medico sea igual al valor proporcionado
+        $cupo = MedicoHorario::where('id_medico', $validated['id_medico'])->count();
+
+        // Pasar el resultado de vuelta a la vista
+        return redirect()->back()->with('cupo', $cupo);
+    }*/
 }
