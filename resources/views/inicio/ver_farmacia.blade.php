@@ -34,6 +34,10 @@
                 <li class="nav-item">
                     <a class="nav-link btn-lg" href="ver_farmacia">FARMACIA</a>
                 </li>
+                <li>
+                    <a class="nav-link btn-lg" href="mostrar_oferta">OFERTA-SERVICIO</a>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link btn-lg" href="login">INICIAR SESION</a>
                 </li>

@@ -5,7 +5,7 @@
     @include('inicio.antesCabecera')
     <link rel="icon" type="image/x-icon" href="Farmacia/assets/favicon.ico" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <link href="Farmacia/css/styles.css" rel="stylesheet" />
+    <link href="oferta/css/styles.css" rel="stylesheet" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
@@ -14,6 +14,7 @@
 <body>
 
 <!-- Encabezado -->
+
 <header class="top-header">
     <div class="container">
         <div class="row">
@@ -39,7 +40,7 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a class="menu active" href="#home">Inicio</a></li>
+                                <li><a class="menu active" href="/">Inicio</a></li>
                                 {{-- <li><a class="menu" href="#about">Acerca</a></li> --}}
                                 <li><a class="menu" href="mostrar_oferta">Oferta-Servicio</a></li>
                                 <li><a class="menu" href="ver_farmacia">Farmacia</a></li>
@@ -53,6 +54,8 @@
         </div>
     </div>
 </header> <!-- end of header area -->
+
+
 
 <!-- Contenido principal -->
 <main>
@@ -182,7 +185,7 @@
     <section class="product-section">
         <div class="container">
             <div class="section-title">
-                <h2>Nuestras <span>Ofertas</span></h2>
+                <h1 style="padding-top: 100px">Nuestras <span>Ofertas</span></h2>
             </div>
             <div class="row">
                 @foreach ($ofertas as $ofer)
