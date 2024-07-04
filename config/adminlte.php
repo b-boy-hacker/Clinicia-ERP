@@ -354,7 +354,11 @@ return [
                     'url'  => 'mostrar_paciente',
                     'icon' => 'fas fa-fw fa-user',
                 ],
-
+                [
+                    'text' => 'Enfermera',
+                    'url'  => 'mostrar_enfermera',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
             
             ],
         ],

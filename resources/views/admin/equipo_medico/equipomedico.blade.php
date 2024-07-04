@@ -22,11 +22,11 @@
     </div>
    @endif
  <div class="container">
-        <h2>Catálogo de Equipo Médico</h2>
+        <h2>Categoria de Equipo Médico</h2>
 
         <!-- Botón para abrir el modal de creación -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
-            Crear Catálogo
+            Crear Categoria
         </button>
 
         <!-- Tabla para mostrar los catálogos existentes -->
@@ -65,11 +65,11 @@
                                                     @csrf
                                                     @method('PUT')
                                                     <div class="form-group">
-                                                        <label for="nombre">Nombre del Catalogo:</label>
+                                                        <label for="nombre">Nombre de la Categoria:</label>
                                                         <input type="text" class="form-control" id="nombre" name="nombre">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="descripcion">Descripcion del Catalogo:</label>
+                                                        <label for="descripcion">Descripcion del Categoria:</label>
                                                         <input type="text" class="form-control" id="descripcion" name="descripcion">
                                                     </div>
                                                     <div class="modal-footer">
@@ -100,7 +100,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createModalLabel">Crear Catálogo</h5>
+                <h5 class="modal-title" id="createModalLabel">Crear Categoria</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

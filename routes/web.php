@@ -185,3 +185,5 @@ Route::post('/editarOferta/{id}', [OfertaController::class, 'editarOferta']);
 
 Route::get('/mostrar_oferta', [OfertaController::class, 'mostrar_oferta']);
 
+
+
