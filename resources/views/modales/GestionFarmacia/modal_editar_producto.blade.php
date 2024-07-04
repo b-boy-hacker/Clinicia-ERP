@@ -1,8 +1,8 @@
-<div class="modal fade" id="modalEditarProducto{{ $producto->id }}" tabindex="-1" role="dialog" aria-labelledby="modalEditarProductoLabel{{ $producto->id }}" aria-hidden="true">
+<div class="modal fade" id="modalEditarProducto{{ $producto->id_producto }}" tabindex="-1" role="dialog" aria-labelledby="modalEditarProductoLabel{{ $producto->id_producto }}" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalEditarProductoLabel{{ $producto->id }}">Editar Producto</h5>
+                <h5 class="modal-title" id="modalEditarProductoLabel{{ $producto->id_producto }}">Editar Producto</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -38,7 +38,7 @@
                         <label for="categoriaProductoEdit">Categoría</label>
                         <select class="form-control" id="categoriaProductoEdit" name="categoria_id" required>
                             @foreach ($categorias as $categoria)
-                            <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
+                            <option value="{{ $categoria->id_categoria }}">{{ $categoria->nombre }}</option>
                             @endforeach
                         </select>
                     </div>

@@ -26,7 +26,7 @@
 					  <ul class="nav navbar-nav navbar-right">
 						<li><a class="menu active" href="#home" >Inicio</a></li>
 						{{-- <li><a class="menu" href="#about">Acerca</a></li> --}}
-						<li><a class="menu" href="#contact">contactanos</a></li>
+						<li><a class="menu" href="mostrar_oferta">Oferta-Servicio</a></li>
 						<li><a class="menu" href="ver_farmacia">farmacia</a></li>
 						<li><a class="menu" href="login">Iniciar Sesion</a></li>
 						<li><a class="menu" href="#team"></a></li>

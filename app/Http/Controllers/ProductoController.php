@@ -44,7 +44,7 @@ class ProductoController extends Controller
             'stock' => 'required|integer|min:0',
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validación para archivos de imagen
             'fecha_expiracion' => 'nullable|date',
-            'categoria_id' => 'nullable|exists:categorias,id',
+            'categoria_id' => 'nullable|exists:categorias, id_categoria',
         ]);
 
         $producto = new Producto();
@@ -68,7 +68,7 @@ class ProductoController extends Controller
         return redirect()->back()->with('success', 'Producto agregado correctamente.');
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_producto)
     {
        // dd('Llega al controlador');
         $request->validate([
@@ -78,10 +78,10 @@ class ProductoController extends Controller
             'stock' => 'required|integer|min:0',
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'fecha_expiracion' => 'nullable|date',
-            'categoria_id' => 'nullable|exists:categorias,id',
+            'categoria_id' => 'nullable|exists:categorias,id_categoria',
         ]);
     
-        $producto = Producto::findOrFail($id);
+        $producto = Producto::findOrFail($id_producto);
         $producto->nombre = $request->nombre;
         $producto->descripcion = $request->descripcion;
         $producto->precio = $request->precio;
@@ -105,9 +105,9 @@ class ProductoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($id_producto)
 {
-    $producto = Producto::findOrFail($id);
+    $producto = Producto::findOrFail($id_producto);
     $producto->delete();
 
     return redirect()->back()->with('success', 'Producto eliminado correctamente.');

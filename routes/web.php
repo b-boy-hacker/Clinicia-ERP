@@ -111,11 +111,6 @@ Route::post('/editar_sala/{id}', [EmergenciaController::class, 'editar_sala']);
 Route::post('/editar_categoria/{id}', [EmergenciaController::class, 'editar_categoria']);
 Route::post('/editar_emergencia/{id}', [EmergenciaController::class, 'editar_emergencia']);
 
-use App\Http\Controllers\OfertaController;
-Route::get('/ver_oferta', [OfertaController::class, 'ver_oferta']);
-Route::post('/crearOferta', [OfertaController::class, 'crearOferta']);
-Route::delete('/borrarOferta/{id}', [OfertaController::class, 'borrarOferta']);
-Route::post('/editarOferta/{id}', [OfertaController::class, 'editarOferta']);
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProveedorController;
@@ -173,8 +168,20 @@ Route::post('/medicos/{id}/laboratorio', [MedicoController::class, 'storeLaborat
 
 Route::get('/paciente/laboratorios', [AdminController::class, 'mostrarLaboratorios'])->name('paciente.mostrarLaboratorios');
 
-//use App\Http\Controllers\CitaController;
 
+//use App\Http\Controllers\CitaController;
 Route::post('/guardar-cita', [ConsultaMedicaControlador::class, 'guardarCita'])->name('guardar-cita');
 Route::get('/obtener-consulta-medica', [ConsultaMedicaControlador::class, 'obtenerConsultaMedica'])->name('obtener-consulta-medica');
 Route::delete('/eliminar-horario/{id}', [ConsultaMedicaControlador::class, 'eliminarHorario'])->name('eliminar-horario');
+
+// ---Esto es el route---
+Route::get('/bitacora', [AdminController::class, 'bitacora'])->name('bitacora.index');
+
+use App\Http\Controllers\OfertaController;
+Route::get('/ver_oferta', [OfertaController::class, 'ver_oferta']);
+Route::post('/crearOferta', [OfertaController::class, 'crearOferta']);
+Route::delete('/borrarOferta/{id}', [OfertaController::class, 'borrarOferta']);
+Route::post('/editarOferta/{id}', [OfertaController::class, 'editarOferta']);
+
+Route::get('/mostrar_oferta', [OfertaController::class, 'mostrar_oferta']);
+

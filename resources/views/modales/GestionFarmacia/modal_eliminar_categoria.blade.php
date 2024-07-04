@@ -1,9 +1,9 @@
 <!-- Modal Eliminar Categoría -->
-<div class="modal fade" id="modalEliminarCategoria{{ $categoria->id }}" tabindex="-1" role="dialog" aria-labelledby="modalEliminarCategoria{{ $categoria->id }}Label" aria-hidden="true">
+<div class="modal fade" id="modalEliminarCategoria{{ $categoria->id_categoria }}" tabindex="-1" role="dialog" aria-labelledby="modalEliminarCategoria{{ $categoria->id_categoria }}Label" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalEliminarCategoria{{ $categoria->id }}Label">Eliminar Categoría</h5>
+                <h5 class="modal-title" id="modalEliminarCategoria{{ $categoria->id_categoria }}Label">Eliminar Categoría</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

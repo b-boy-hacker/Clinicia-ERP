@@ -37,12 +37,12 @@
                     <!-- Filas de categorías -->
                     @foreach ($categorias as $categoria)
                     <tr>
-                        <td>{{ $categoria->id }}</td>
+                        <td>{{ $categoria->id_categoria }}</td>
                         <td>{{ $categoria->nombre }}</td>
                         <td>
                             <!-- Botones para abrir modales de editar y eliminar -->
-                            <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalEditarCategoria{{ $categoria->id }}">Editar</button>
-                            <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalEliminarCategoria{{ $categoria->id }}">Eliminar</button>
+                            <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalEditarCategoria{{ $categoria->id_categoria }}">Editar</button>
+                            <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalEliminarCategoria{{ $categoria->id_categoria }}">Eliminar</button>
                         </td>
                     </tr>
                     @endforeach
@@ -74,14 +74,14 @@
                     <!-- Filas de productos -->
                     @foreach ($productos as $producto)
                     <tr>
-                        <td>{{ $producto->id }}</td>
+                        <td>{{ $producto->id_producto }}</td>
                         <td>{{ $producto->nombre }}</td>
                         <td>{{ $producto->descripcion }}</td>
                         <td>{{ $producto->precio }}</td>
                         <td>
                             <!-- Botones para abrir modales de editar y eliminar -->
-                            <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalEditarProducto{{ $producto->id }}">Editar</button>
-                            <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalEliminarProducto{{ $producto->id }}">Eliminar</button>
+                            <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalEditarProducto{{ $producto->id_producto }}">Editar</button>
+                            <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalEliminarProducto{{ $producto->id_producto }}">Eliminar</button>
                         </td>
                     </tr>
                     @endforeach

@@ -21,6 +21,8 @@ use App\Models\RecetaMedica;
 use App\Models\MedicoHorario;
 use App\Models\EstadoConsulta;
 use App\Models\Laboratorio;
+use App\Models\Bitacora;
+use Carbon\Carbon;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -319,23 +321,47 @@ class AdminController extends Controller
         return redirect()->back()->with('message','eliminado exitosanmente');
     }
 //-------------------------------------------------------------------------------
-    public function ver_esp_medico(){
-        $especialidad =  Especialidad::all();
-        $medico = UsuarioRol::where('rol_id', 2)->get(); 
-        $espMed =  EspecialidadMedico::all();
-        return view('admin.especialidad_medico.ver_esp_medico',
-        compact('espMed','especialidad','medico'));//, ['usuario' => $usuario]);
+public function ver_esp_medico(){
+    $especialidad =  Especialidad::all();
+    $medico = UsuarioRol::where('rol_id', 2)->get(); 
+    $espMed =  EspecialidadMedico::all();
+    $bitacora= Bitacora::all();
+    return view('admin.especialidad_medico.ver_esp_medico',
+    compact('espMed','especialidad','medico','bitacora'));//, ['usuario' => $usuario]);
+}
+
+
+public function bitacora()
+    {
+        $bitacora = Bitacora::all();
+        $especialidad = EspecialidadMedico::all();
+
+        return view('admin.bitacora.bitacora', compact('bitacora', 'especialidad'));
     }
 
-    public function crear_esp_medico(Request $request){
-        $especialidad = new EspecialidadMedico;
-        $especialidad->nombres = $request->nombres;
-        $especialidad->apellido_paterno = $request->apellido_paterno;
-        $especialidad->apellido_materno = $request->apellido_materno;
-        $especialidad->especialidad_id = $request->especialidad_id;
-        $especialidad->save();   
-        return redirect()->back()->with('message', 'Agregado exitosamente');
-    }
+public function crear_esp_medico(Request $request){
+    $especialidad = new EspecialidadMedico;
+    $especialidad->nombres = $request->nombres;
+    $especialidad->apellido_paterno = $request->apellido_paterno;
+    $especialidad->apellido_materno = $request->apellido_materno;
+    $especialidad->especialidad_id = $request->especialidad_id;
+    $especialidad->save();  
+    
+    $bitacora = new Bitacora();
+    $bitacora->descripcion = "Creación de Especialidad exitosa";
+    
+    $bitacora->usuario = auth()->user()->nombres;
+    $bitacora->usuario_id = auth()->user()->id;
+    $bitacora->direccion_ip = $request->ip();
+    $bitacora->navegador = $request->header('user-agent');
+
+    $bitacora->tabla = "Especialidad Medico";
+    $bitacora->registro_id = $especialidad->id;
+    $bitacora->fecha_hora = Carbon::now();
+    $bitacora->save();
+    return redirect()->back()->with('message', 'Agregado exitosamente');
+}
+
 
     public function editar_esp_med (Request $request, $id){
         $especialidad = EspecialidadMedico::find($id);   

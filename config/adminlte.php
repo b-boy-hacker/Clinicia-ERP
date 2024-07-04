@@ -462,6 +462,16 @@ return [
             ],
         ],
 
+        [
+            'text'    => 'Gestionar Bitacora',
+            'submenu' => [
+                [
+                    'text' => 'Ver bitacora',
+                    'url'  => 'bitacora',
+                   // 'icon' => 'fas fa-fw fa-user',
+                ],           
+            ],
+        ],
        
     ],
 
