@@ -1,9 +1,9 @@
 <!-- Modal Editar Categoría -->
-<div class="modal fade" id="modalEditarCategoria{{ $categoria->id }}" tabindex="-1" role="dialog" aria-labelledby="modalEditarCategoria{{ $categoria->id }}Label" aria-hidden="true">
+<div class="modal fade" id="modalEditarCategoria{{ $categoria->id_categoria }}" tabindex="-1" role="dialog" aria-labelledby="modalEditarCategoria{{ $categoria->id_categoria }}Label" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalEditarCategoria{{ $categoria->id }}Label">Editar Categoría</h5>
+                <h5 class="modal-title" id="modalEditarCategoria{{ $categoria->id_categoria }}Label">Editar Categoría</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

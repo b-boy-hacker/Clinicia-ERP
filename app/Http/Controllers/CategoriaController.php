@@ -57,13 +57,13 @@ class CategoriaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_categoria)
     {
         $request->validate([
             'nombre' => 'required|string|max:255',
         ]);
 
-        $categoria = Categoria::findOrFail($id);
+        $categoria = Categoria::findOrFail($id_categoria);
         $categoria->nombre = $request->nombre;
         $categoria->save();
 
@@ -74,9 +74,9 @@ class CategoriaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($id_categoria)
     {
-        $categoria = Categoria::findOrFail($id);
+        $categoria = Categoria::findOrFail($id_categoria);
         $categoria->delete();
 
         return redirect()->back()->with('success', 'Categoría eliminada correctamente.');

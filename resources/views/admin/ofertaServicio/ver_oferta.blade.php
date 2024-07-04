@@ -16,6 +16,13 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <style type="text/css">
+        .img_size{
+                width: 100px;
+                height: 100px;
+        }        
+    </style>
+
 @stop
 
     
@@ -41,29 +48,33 @@
             <thead>
                 <tr>
                     <th>ID</th> 
-                    <th>Especialidad</th>  
+                    <th>Servicio</th>  
                     <th>Descipcion</th>
+                    <th>Precio</th>
                     <th>Descuento</th>
-                    <th>Fecha Inicio</th> 
-                    <th>Fecha Final</th>                         
+                    <th>Imagen</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                {{-- @foreach ($especialidad as $especialidades) --}}
+                @foreach ($oferta as $o)
                 <tr>
-                    {{-- <td>{{$especialidades->id}}</td>
-                    <td>{{$especialidades->nombre}}
-                        <td>
-                            <button href="{{url('editar_especialidad', $especialidades->id)}}" type="button" 
+                     <td>{{$o->id}}</td>
+                    <td>{{$o->servicio}} </td>
+                    <td>{{$o->descripcion}} </td>
+                    <td>{{$o->precio}} </td>
+                    <td>{{$o->descuento}} </td>
+                    <td><img class="img_size" src="/oferta/{{$o->imagen}}"></td>
+                    <td>
+                            <button href="{{url('editarOferta', $o->id)}}" type="button"
                                         class="btn btn-warning" data-toggle="modal"
-                                        data-target="#modalEditarEsp-{{ $especialidades->id }}" 
+                                        data-target="#modalEditarOferta-{{ $o->id }}" 
                                         >                           
                                     Editar
                             </button>
     
                         
-                            <form action="{{ url('borrar_especialidad', $especialidades->id) }}" method="POST"
+                            <form action="{{ url('borrarOferta', $o->id) }}" method="POST"
                                 style="display: inline-block;">
                                 @csrf
                                 @method('DELETE')
@@ -71,15 +82,11 @@
                                     Eliminar
                                 </button>
                             </form>
-                            @include('admin.especialidad.modalEditar')
+                            @include('admin.ofertaServicio.editar')
 
-                        </td>  
-                        <td>
-                            
-                        </td> --}}
-    
-                </tr>
-                {{-- @endforeach   --}}
+                        </td>                         
+                    </tr>
+                @endforeach  
             </tbody>
         </table>
     
