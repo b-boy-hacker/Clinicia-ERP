@@ -350,7 +350,7 @@ public function crear_esp_medico(Request $request){
     $bitacora = new Bitacora();
     $bitacora->descripcion = "Creación de Especialidad exitosa";
     
-    $bitacora->usuario = auth()->user()->nombres;
+    $bitacora->usuario = $request->nombres;
     $bitacora->usuario_id = auth()->user()->id;
     $bitacora->direccion_ip = $request->ip();
     $bitacora->navegador = $request->header('user-agent');
